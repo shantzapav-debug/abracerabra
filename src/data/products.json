@@ -1,0 +1,381 @@
+{
+  "company": {
+    "name": "Abracerabra",
+    "location": "Bengaluru, India",
+    "nature": "Manufacturer",
+    "gst": "29AGUPB3940N1ZS",
+    "iec": "AGUPB3940N",
+    "employees": "Upto 10 People",
+    "established": "2017"
+  },
+  "categories": [
+    {
+      "id": "grinding-wheel",
+      "name": "Grinding Wheels",
+      "prdName": "Grinding Wheels"
+    },
+    {
+      "id": "honing-stone",
+      "name": "Honing Stones",
+      "prdName": "Honing Stones/Sticks"
+    },
+    {
+      "id": "honing-stick",
+      "name": "Honing Sticks",
+      "prdName": "Honing Stones/Sticks"
+    },
+    {
+      "id": "cutting-wheel",
+      "name": "Cutting Wheels",
+      "prdName": "Cutting Wheels/Discs"
+    },
+    {
+      "id": "cutting-disc",
+      "name": "Cutting Discs",
+      "prdName": "Cutting Wheels/Discs"
+    },
+    {
+      "id": "specialties",
+      "name": "Specialties",
+      "prdName": "Specialties"
+    }
+  ],
+  "products": [
+    {
+      "id": "gw-rail-100",
+      "name": "100mm Rail Profile Grinding Wheels",
+      "category": "grinding-wheel",
+      "image": "https://5.imimg.com/data5/FW/BL/MY-34712160/rail-profile-grinding-wheels-500x500.jpg",
+      "moq": 50,
+      "lotSize": 10,
+      "indicativePrice": 420.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "100mm rail profile grinding; industrial rail maintenance"
+    },
+    {
+      "id": "gw-abrasive",
+      "name": "Abrasive Grinding Wheel",
+      "category": "grinding-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444821624/NX/DW/EJ/34712160/abrasive-grinding-wheel-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 18.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "General-purpose abrasive grinding wheel"
+    },
+    {
+      "id": "gw-alox",
+      "name": "Aluminium Oxide Grinding Wheel",
+      "category": "grinding-wheel",
+      "image": "https://4.imimg.com/data4/XY/YS/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 22.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Aluminium oxide bond for metal finishing"
+    },
+    {
+      "id": "gw-carbide",
+      "name": "Carbide Grinding Wheel",
+      "category": "grinding-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819136/TW/IG/HZ/34712160/carbide-grinding-wheel-500x500.jpg",
+      "moq": 50,
+      "lotSize": 10,
+      "indicativePrice": 45.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Carbide grinding applications"
+    },
+    {
+      "id": "gw-bench",
+      "name": "Bench Grinding Wheel",
+      "category": "grinding-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444818738/JQ/NF/BX/34712160/bench-grinding-wheel-500x500.jpg",
+      "moq": 50,
+      "lotSize": 10,
+      "indicativePrice": 28.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Bench grinder compatible"
+    },
+    {
+      "id": "hs-abrasive",
+      "name": "Abrasive Honing Stone",
+      "category": "honing-stone",
+      "image": "https://4.imimg.com/data4/EU/CP/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 6.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Standard abrasive honing stone"
+    },
+    {
+      "id": "hs-cbn",
+      "name": "CBN Honing Stone",
+      "category": "honing-stone",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819993/GY/XN/QE/34712160/cbn-honing-stone-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 35.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Cubic boron nitride honing stone"
+    },
+    {
+      "id": "hs-super",
+      "name": "Super Honing Stone",
+      "category": "honing-stone",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819833/IZ/VL/VY/34712160/super-honing-stone-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 28.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "High-precision super honing"
+    },
+    {
+      "id": "hs-finishing",
+      "name": "Abra Cer Abra Abrasive Finishing Stones",
+      "category": "honing-stone",
+      "image": "https://4.imimg.com/data4/HY/GQ/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 8.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Finishing stones for surface refinement"
+    },
+    {
+      "id": "hs-finish-2",
+      "name": "Finishing Honing Stones",
+      "category": "honing-stone",
+      "image": "https://4.imimg.com/data4/GV/TU/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 7.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Finishing-grade honing stones"
+    },
+    {
+      "id": "hs-oil",
+      "name": "Oil Finishing Grinding Honing Stone",
+      "category": "honing-stone",
+      "image": "https://4.imimg.com/data4/QV/CR/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 150,
+      "lotSize": 50,
+      "indicativePrice": 9.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Oil-compatible finishing honing"
+    },
+    {
+      "id": "hs-bike",
+      "name": "Two Wheeler Bikes Diamond Honing Stones",
+      "category": "honing-stone",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444821511/WY/SI/OR/34712160/two-wheeler-bikes-diamond-honing-stones-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 42.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Diamond honing for two-wheeler engines"
+    },
+    {
+      "id": "hst-diamond",
+      "name": "Diamond Honing Stick",
+      "category": "honing-stick",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819248/OL/RF/EK/34712160/diamond-honing-stick-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 38.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Diamond-impregnated honing stick"
+    },
+    {
+      "id": "hst-abrasive",
+      "name": "Abrasive Honing Stick",
+      "category": "honing-stick",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444820923/MY/FV/GQ/34712160/abrasive-honing-stick-500x500.jpg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 5.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Standard abrasive honing stick"
+    },
+    {
+      "id": "hst-16mm",
+      "name": "16 mm Honing Stick",
+      "category": "honing-stick",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444820130/KS/BZ/MA/34712160/16-mm-honing-stick-500x500.jpg",
+      "moq": 150,
+      "lotSize": 50,
+      "indicativePrice": 6.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "16 mm diameter honing stick"
+    },
+    {
+      "id": "hst-yellow",
+      "name": "Yellow Honing Stick",
+      "category": "honing-stick",
+      "image": "https://5.imimg.com/data5/CA/OV/WO/ANDROID-34712160/prod-20200802-1032026904322859698889638-jpg-500x500.jpg",
+      "moq": 150,
+      "lotSize": 50,
+      "indicativePrice": 5.5,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Yellow grade honing stick"
+    },
+    {
+      "id": "hst-34",
+      "name": "3/4 Inch Honing Stick",
+      "category": "honing-stick",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819668/IW/AA/RC/34712160/3-4-inch-honing-stick-500x500.jpg",
+      "moq": 150,
+      "lotSize": 50,
+      "indicativePrice": 7.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "3/4 inch honing stick"
+    },
+    {
+      "id": "cw-4in-a",
+      "name": "4 Inch Cutting Wheel",
+      "category": "cutting-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819485/DU/QL/HE/34712160/4-inch-cutting-wheel-500x500.jpg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 3.5,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "4 inch cutting wheel"
+    },
+    {
+      "id": "cw-4in-b",
+      "name": "4 Inch Cutting Wheel (Alt)",
+      "category": "cutting-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444820227/QL/YI/MQ/34712160/4-inch-cutting-wheel-500x500.jpg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 3.8,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "4 inch cutting wheel variant"
+    },
+    {
+      "id": "cw-metal",
+      "name": "Metal Cutting Wheel",
+      "category": "cutting-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444819404/WW/JB/LH/34712160/metal-cutting-wheel-500x500.jpg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 4.2,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Metal cutting applications"
+    },
+    {
+      "id": "cw-flap",
+      "name": "Flap Cutting Wheel",
+      "category": "cutting-wheel",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444821358/YJ/RZ/TY/34712160/flap-cutting-wheel-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 5.5,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Flap-style cutting wheel"
+    },
+    {
+      "id": "cd-spare",
+      "name": "Spare Cutting Abrasive Disc",
+      "category": "cutting-disc",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444820707/QY/CJ/RJ/34712160/spare-cutting-disc-500x500.jpg",
+      "moq": 200,
+      "lotSize": 50,
+      "indicativePrice": 3.2,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Spare abrasive cutting disc"
+    },
+    {
+      "id": "cd-flap",
+      "name": "Flap Cutting Disc",
+      "category": "cutting-disc",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/8/444821225/JO/VO/PL/34712160/flap-cutting-disc-500x500.jpg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 4.8,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Flap cutting disc"
+    },
+    {
+      "id": "sp-mounted",
+      "name": "Mounted Abrasive Point",
+      "category": "specialties",
+      "image": "https://4.imimg.com/data4/IO/WY/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 100,
+      "lotSize": 25,
+      "indicativePrice": 2.5,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Mounted abrasive point for detail work"
+    },
+    {
+      "id": "sp-deburr",
+      "name": "Abra Cer Abra Deburring Wheels",
+      "category": "specialties",
+      "image": "https://5.imimg.com/data5/NA/IZ/GH/ANDROID-34712160/product-jpeg-500x500.jpg",
+      "moq": 50,
+      "lotSize": 10,
+      "indicativePrice": 24.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Deburring wheels"
+    },
+    {
+      "id": "sp-ceramic",
+      "name": "Machinable Ceramic",
+      "category": "specialties",
+      "image": "https://5.imimg.com/data5/ANDROID/Default/2026/3/589556013/ZB/UW/OR/34712160/product-jpeg-500x500.jpg",
+      "moq": 20,
+      "lotSize": 5,
+      "indicativePrice": 85.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Machinable technical ceramic"
+    },
+    {
+      "id": "sp-dressing",
+      "name": "Abrasive Dressing Sticks",
+      "category": "specialties",
+      "image": "https://4.imimg.com/data4/EU/CP/ANDROID-34712160/product-500x500.jpeg",
+      "moq": 50,
+      "lotSize": 10,
+      "indicativePrice": 12.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Wheel dressing sticks"
+    },
+    {
+      "id": "sp-tubes",
+      "name": "Ceramic Tubes",
+      "category": "specialties",
+      "image": "https://5.imimg.com/data5/ANDROID/Default/2026/3/589556013/ZB/UW/OR/34712160/product-jpeg-500x500.jpg",
+      "moq": 30,
+      "lotSize": 10,
+      "indicativePrice": 40.0,
+      "currency": "INR",
+      "unit": "piece",
+      "specs": "Technical ceramic tubes"
+    }
+  ]
+}
