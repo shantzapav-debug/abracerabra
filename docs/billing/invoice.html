@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Invoice ABR/2026-27/001 — Abracerabra</title>
+<style>
+@page { size: A4; margin: 10mm 11mm 12mm 11mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Inter, "Noto Sans", "Liberation Sans", sans-serif;
+  color: #1a1814;
+  font-size: 9pt;
+  line-height: 1.35;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.sheet {
+  position: relative;
+  height: 272mm;
+  break-after: page;
+}
+.sheet:last-child { break-after: auto; }
+.bar {
+  display: flex;
+  justify-content: space-between;
+  background: #1a1814;
+  color: #f4f1ea;
+  padding: 5px 10px;
+  font-size: 8pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.mast {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 2px 10px;
+  border-bottom: 2.5px solid #1a1814;
+}
+.mast h1 {
+  font-family: "Liberation Serif", "Noto Serif", serif;
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 0 0 2px;
+}
+.mast .role { margin: 0; color: #5c564c; font-size: 8.5pt; }
+.mast .inv {
+  text-align: right;
+}
+.mast .inv .kicker {
+  font-family: "Liberation Serif", serif;
+  font-size: 18pt;
+  letter-spacing: 0.16em;
+  margin: 0;
+}
+.meta-line { margin: 1px 0; font-size: 8.5pt; }
+.meta-line strong { font-weight: 650; }
+.rule {
+  border: 0;
+  border-top: 0.6px solid #1a1814;
+  margin: 2px 0 0;
+}
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #1a1814;
+  border-top: 0;
+  margin-top: 0;
+}
+.party { padding: 8px 10px 9px; }
+.party + .party { border-left: 1px solid #1a1814; }
+.party h2 {
+  margin: 0 0 4px;
+  font-size: 8pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.party .name { font-size: 11pt; font-weight: 650; margin: 0 0 2px; }
+.party p { margin: 0; }
+.party .legal { font-size: 8pt; color: #3f3a33; margin-top: 3px; }
+.dues {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  border: 1px solid #1a1814;
+  border-top: 0;
+}
+.due { padding: 7px 10px 8px; }
+.due + .due { border-left: 1px solid #1a1814; }
+.due .lbl {
+  font-size: 7.5pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c564c;
+}
+.due .amt {
+  font-family: "Liberation Serif", serif;
+  font-size: 14pt;
+  margin-top: 1px;
+}
+.due.now { background: #f4f1ea; }
+h3 {
+  font-size: 8.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 8px 0 3px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+}
+th, td {
+  border: 0.6px solid #1a1814;
+  padding: 2px 5px;
+  vertical-align: top;
+}
+tr, .formula, .callout, .sign, .words { break-inside: avoid; }
+th {
+  background: #1a1814;
+  color: #f4f1ea;
+  font-weight: 600;
+  text-align: left;
+  letter-spacing: 0.04em;
+  font-size: 7.4pt;
+  text-transform: uppercase;
+}
+td.num, th.num {
+  text-align: right;
+  font-family: "JetBrains Mono", "Liberation Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 450;
+  white-space: nowrap;
+}
+th.num { font-family: Inter, "Noto Sans", sans-serif; }
+tr.total td { background: #f4f1ea; font-weight: 650; }
+.words {
+  border: 1px solid #1a1814;
+  border-top: 0;
+  padding: 6px 8px;
+  background: #f4f1ea;
+  font-size: 8.5pt;
+}
+.note { margin: 6px 0 0; font-size: 8pt; color: #3f3a33; }
+.formula {
+  font-family: "JetBrains Mono", "Liberation Mono", monospace;
+  font-size: 7.6pt;
+  line-height: 1.35;
+  background: #f7f5f1;
+  border: 0.6px solid #1a1814;
+  padding: 6px 8px;
+  white-space: pre;
+  margin: 0;
+}
+.small { font-size: 8pt; margin: 4px 0; }
+ul.clean { margin: 4px 0 0; padding-left: 16px; }
+ul.clean li { margin: 1px 0; }
+.sign {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 12px;
+}
+.sign .box {
+  border: 1px solid #1a1814;
+  min-height: 62px;
+  padding: 8px 10px;
+}
+.sign .who { font-size: 8pt; letter-spacing: 0.08em; text-transform: uppercase; color: #5c564c; }
+.sign .line { margin-top: 26px; border-top: 0.6px solid #1a1814; padding-top: 3px; font-size: 8pt; }
+.foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 1.5px solid #1a1814;
+  padding-top: 3px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 7.5pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #5c564c;
+}
+.sheet-title {
+  font-family: "Liberation Serif", serif;
+  font-size: 13pt;
+  margin: 8px 0 2px;
+}
+.lede { margin: 0 0 6px; }
+.callout {
+  border: 1.5px solid #1a1814;
+  padding: 7px 9px;
+  margin: 6px 0;
+}
+.callout strong { font-size: 9.5pt; }
+</style>
+</head>
+<body>
+
+<section class="sheet">
+  <div class="bar">
+    <span>Original for recipient</span>
+    <span>Commercial invoice · not a GST tax invoice</span>
+  </div>
+  <div class="mast">
+    <div>
+      <h1>Pavan Ram</h1>
+      <p class="role">Design and development of software</p>
+      <p class="role">shantzapav@gmail.com</p>
+      <p class="role">Supplier GSTIN: not printed · GST not charged</p>
+    </div>
+    <div class="inv">
+      <p class="kicker">INVOICE</p>
+      <p class="meta-line"><strong>No.</strong> ABR/2026-27/001</p>
+      <p class="meta-line"><strong>Date</strong> 07 October 2026</p>
+      <p class="meta-line"><strong>Year</strong> 2026–27</p>
+    </div>
+  </div>
+  <hr class="rule">
+
+  <div class="parties">
+    <div class="party">
+      <h2>Billed by</h2>
+      <p class="name">Pavan Ram</p>
+      <p>Professional services for the Abracerabra B2B request-for-quote platform.</p>
+      <p class="legal">PAN and GSTIN of the supplier are not printed on this copy. Bank and UPI details are sent with each payment demand, not on this invoice.</p>
+    </div>
+    <div class="party">
+      <h2>Billed to</h2>
+      <p class="name">Abracerabra</p>
+      <p>Legal name: KRISHNAMURTHY BADARINATHA</p>
+      <p>Manufacturer · Bengaluru, Karnataka</p>
+      <p class="legal">GSTIN 29AGUPB3940N1ZS · IEC / PAN AGUPB3940N · State code 29<br>Place of supply: Karnataka. Street address is the principal place on the GST registration.</p>
+    </div>
+  </div>
+
+  <div class="dues">
+    <div class="due">
+      <div class="lbl">Contract value</div>
+      <div class="amt">₹ 2,00,000.00</div>
+    </div>
+    <div class="due now">
+      <div class="lbl">Due now · Installment 1, advance</div>
+      <div class="amt">₹ 80,000.00</div>
+    </div>
+    <div class="due">
+      <div class="lbl">Balance after the advance</div>
+      <div class="amt">₹ 1,20,000.00</div>
+    </div>
+  </div>
+
+  <h3>Charges</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:8%">No.</th>
+        <th>Particulars</th>
+        <th class="num" style="width:10%">Hours</th>
+        <th class="num" style="width:14%">Rate ₹</th>
+        <th class="num" style="width:16%">Amount ₹</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Discovery and RFQ workflow design</td><td class='num'>6</td><td class='num'>2,500.00</td><td class='num'>15,000.00</td></tr><tr><td>02</td><td>Visual system and responsive layout</td><td class='num'>10</td><td class='num'>2,500.00</td><td class='num'>25,000.00</td></tr><tr><td>03</td><td>Storefront pages</td><td class='num'>14</td><td class='num'>2,500.00</td><td class='num'>35,000.00</td></tr><tr><td>04</td><td>RFQ cart and lead capture</td><td class='num'>10</td><td class='num'>2,500.00</td><td class='num'>25,000.00</td></tr><tr><td>05</td><td>Logistics step</td><td class='num'>4</td><td class='num'>2,500.00</td><td class='num'>10,000.00</td></tr><tr><td>06</td><td>Four-language interface</td><td class='num'>8</td><td class='num'>2,500.00</td><td class='num'>20,000.00</td></tr><tr><td>07</td><td>Product catalog</td><td class='num'>6</td><td class='num'>2,500.00</td><td class='num'>15,000.00</td></tr><tr><td>08</td><td>Quote API and Sheets webhook</td><td class='num'>8</td><td class='num'>2,500.00</td><td class='num'>20,000.00</td></tr><tr><td>09</td><td>Sheet sync for the receptionist</td><td class='num'>4</td><td class='num'>2,500.00</td><td class='num'>10,000.00</td></tr><tr><td>10</td><td>Hosting preparation</td><td class='num'>6</td><td class='num'>2,500.00</td><td class='num'>15,000.00</td></tr><tr><td>11</td><td>Training and post-hosting close-out</td><td class='num'>4</td><td class='num'>2,500.00</td><td class='num'>10,000.00</td></tr>
+      <tr class="total">
+        <td></td>
+        <td>Total · 80 billed hours × ₹ 2,500.00</td>
+        <td class="num">80</td>
+        <td class="num">2,500.00</td>
+        <td class="num">2,00,000.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="words">
+    <strong>Amount payable:</strong> ₹ 2,00,000.00<br>
+    <strong>In words:</strong> Indian Rupees Two Lakh Only<br>
+    <strong>Of which due on acceptance:</strong> ₹ 80,000.00 — Indian Rupees Eighty Thousand Only
+  </div>
+  <p class="note">SAC 998314 — Information technology design and development services. Reverse charge: No. Currency: INR. Each amount = billed hours × ₹ 2,500.00. Page 2 is the hour build-up. Page 3 is the line-by-line split and the running balance. Page 4 is the 18% composition. GST is not added on top of ₹ 2,00,000.00.</p>
+  <h3>Three installments of the same ₹ 2,00,000.00</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Stage</th>
+        <th>When it is payable</th>
+        <th class="num">Share</th>
+        <th class="num">Amount ₹</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Advance</td>
+        <td>On acceptance of this invoice, before hosting</td>
+        <td class="num">40%</td>
+        <td class="num">80,000.00</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>During hosting</td>
+        <td>While production hosting is being completed</td>
+        <td class="num">30%</td>
+        <td class="num">60,000.00</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Post-hosting</td>
+        <td>After the site is set, training is done, and finalization is closed</td>
+        <td class="num">30%</td>
+        <td class="num">60,000.00</td>
+      </tr>
+      <tr class="total">
+        <td></td>
+        <td>Total payable</td>
+        <td>40 + 30 + 30 = 100</td>
+        <td class="num">100%</td>
+        <td class="num">2,00,000.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small">Amount due with this copy is installment 1, ₹ 80,000.00. Installments 2 and 3 are demanded later against invoice ABR/2026-27/001.</p>
+  <div class="foot"><span>ABR/2026-27/001 · Abracerabra</span><span>Page 1 of 4</span></div>
+</section>
+
+<section class="sheet">
+  <div class="bar">
+    <span>ABR/2026-27/001 · Page 2 of 4</span>
+    <span>Effort statement</span>
+  </div>
+  <p class="sheet-title">Effort statement</p>
+  <p class="lede">Billed hours are a whole-hour estimate used to build the price. They are not a clocked timesheet. Blocks of 30 or 40 minutes are not listed on their own; they sit inside the hour charged for that line.</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:8%">No.</th>
+        <th>What the hour covers</th>
+        <th class="num" style="width:10%">Hours</th>
+        <th class="num" style="width:28%">Hours × rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td><strong>Discovery and RFQ workflow design</strong><br>Buyer path from catalog to quote cart, lead, and logistics. No checkout and no online payment.</td><td class='num'>6</td><td class='num'>6 × 2,500.00<br>= 15,000.00</td></tr><tr><td>02</td><td><strong>Visual system and responsive layout</strong><br>Header, footer, product cards, and the page frame for catalog, cart, and forms.</td><td class='num'>10</td><td class='num'>10 × 2,500.00<br>= 25,000.00</td></tr><tr><td>03</td><td><strong>Storefront pages</strong><br>Home, catalog, category, product detail, and not-found. Indicative INR price, MOQ, and lot size.</td><td class='num'>14</td><td class='num'>14 × 2,500.00<br>= 35,000.00</td></tr><tr><td>04</td><td><strong>RFQ cart and lead capture</strong><br>Quantities, MOQ checks, buyer form, and the confirmation state after submit.</td><td class='num'>10</td><td class='num'>10 × 2,500.00<br>= 25,000.00</td></tr><tr><td>05</td><td><strong>Logistics step</strong><br>Delivery address, landmark, location, and mode of transport, tied to the lead.</td><td class='num'>4</td><td class='num'>4 × 2,500.00<br>= 10,000.00</td></tr><tr><td>06</td><td><strong>Four-language interface</strong><br>English, Japanese, French, and Arabic, including Arabic script.</td><td class='num'>8</td><td class='num'>8 × 2,500.00<br>= 20,000.00</td></tr><tr><td>07</td><td><strong>Product catalog</strong><br>28 products in 6 categories, with indicative prices in INR.</td><td class='num'>6</td><td class='num'>6 × 2,500.00<br>= 15,000.00</td></tr><tr><td>08</td><td><strong>Quote API and Sheets webhook</strong><br>Health, products, and quote routes. Lead id, RFQ reference, and webhook. Sender key stays out of the repo.</td><td class='num'>8</td><td class='num'>8 × 2,500.00<br>= 20,000.00</td></tr><tr><td>09</td><td><strong>Sheet sync for the receptionist</strong><br>Products, Leads, and Logistics tabs, plus the helpers that sync the catalog and the lead rows.</td><td class='num'>4</td><td class='num'>4 × 2,500.00<br>= 10,000.00</td></tr><tr><td>10</td><td><strong>Hosting preparation</strong><br>Vercel project wiring, serverless /api routes, and the deployment notes.</td><td class='num'>6</td><td class='num'>6 × 2,500.00<br>= 15,000.00</td></tr><tr><td>11</td><td><strong>Training and post-hosting close-out</strong><br>Production build check, owner training, and finalization once the site is set.</td><td class='num'>4</td><td class='num'>4 × 2,500.00<br>= 10,000.00</td></tr>
+      <tr class="total">
+        <td></td>
+        <td>Cross-add of billed hours and amounts</td>
+        <td class="num">80</td>
+        <td class="num">2,00,000.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small">Identity: 80 × ₹ 2,500.00 = ₹ 2,00,000.00. Difference against the contract value: ₹ 0.00.</p>
+
+  <h3>Catalog counted in line 07</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th class="num">Products</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Grinding wheels</td><td class="num">5</td></tr>
+      <tr><td>Honing stones</td><td class="num">7</td></tr>
+      <tr><td>Honing sticks</td><td class="num">5</td></tr>
+      <tr><td>Cutting wheels</td><td class="num">4</td></tr>
+      <tr><td>Cutting discs</td><td class="num">2</td></tr>
+      <tr><td>Specialties</td><td class="num">5</td></tr>
+      <tr class="total"><td>5 + 7 + 5 + 4 + 2 + 5</td><td class="num">28</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Line 07 charges 6 hours for loading these 28 products and 6 categories. The count is the catalog in the application, not a separate fee.</p>
+  <div class="foot"><span>ABR/2026-27/001 · Abracerabra</span><span>Page 2 of 4</span></div>
+</section>
+
+<section class="sheet">
+  <div class="bar">
+    <span>ABR/2026-27/001 · Page 3 of 4</span>
+    <span>Installment split</span>
+  </div>
+  <p class="sheet-title">How each line is split</p>
+  <h3>Worked example, line 01</h3>
+  <pre class="formula">Hours × rate
+  6 × 2,500.00 = 15,000.00
+
+Advance      = 15,000.00 × 40/100 = 6,000.00
+Hosting      = 15,000.00 × 30/100 = 4,500.00
+Post-hosting = 15,000.00 × 30/100 = 4,500.00
+Cross-add    = 6,000.00 + 4,500.00 + 4,500.00 = 15,000.00</pre>
+
+  <h3>Every line, split 40 / 30 / 30</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Particulars</th>
+        <th class="num">Amount ₹</th>
+        <th class="num">Advance 40%</th>
+        <th class="num">Hosting 30%</th>
+        <th class="num">Final 30%</th>
+        <th class="num">Cross-add</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Discovery and RFQ workflow design</td><td class='num'>15,000.00</td><td class='num'>6,000.00</td><td class='num'>4,500.00</td><td class='num'>4,500.00</td><td class='num'>15,000.00</td></tr><tr><td>02</td><td>Visual system and responsive layout</td><td class='num'>25,000.00</td><td class='num'>10,000.00</td><td class='num'>7,500.00</td><td class='num'>7,500.00</td><td class='num'>25,000.00</td></tr><tr><td>03</td><td>Storefront pages</td><td class='num'>35,000.00</td><td class='num'>14,000.00</td><td class='num'>10,500.00</td><td class='num'>10,500.00</td><td class='num'>35,000.00</td></tr><tr><td>04</td><td>RFQ cart and lead capture</td><td class='num'>25,000.00</td><td class='num'>10,000.00</td><td class='num'>7,500.00</td><td class='num'>7,500.00</td><td class='num'>25,000.00</td></tr><tr><td>05</td><td>Logistics step</td><td class='num'>10,000.00</td><td class='num'>4,000.00</td><td class='num'>3,000.00</td><td class='num'>3,000.00</td><td class='num'>10,000.00</td></tr><tr><td>06</td><td>Four-language interface</td><td class='num'>20,000.00</td><td class='num'>8,000.00</td><td class='num'>6,000.00</td><td class='num'>6,000.00</td><td class='num'>20,000.00</td></tr><tr><td>07</td><td>Product catalog</td><td class='num'>15,000.00</td><td class='num'>6,000.00</td><td class='num'>4,500.00</td><td class='num'>4,500.00</td><td class='num'>15,000.00</td></tr><tr><td>08</td><td>Quote API and Sheets webhook</td><td class='num'>20,000.00</td><td class='num'>8,000.00</td><td class='num'>6,000.00</td><td class='num'>6,000.00</td><td class='num'>20,000.00</td></tr><tr><td>09</td><td>Sheet sync for the receptionist</td><td class='num'>10,000.00</td><td class='num'>4,000.00</td><td class='num'>3,000.00</td><td class='num'>3,000.00</td><td class='num'>10,000.00</td></tr><tr><td>10</td><td>Hosting preparation</td><td class='num'>15,000.00</td><td class='num'>6,000.00</td><td class='num'>4,500.00</td><td class='num'>4,500.00</td><td class='num'>15,000.00</td></tr><tr><td>11</td><td>Training and post-hosting close-out</td><td class='num'>10,000.00</td><td class='num'>4,000.00</td><td class='num'>3,000.00</td><td class='num'>3,000.00</td><td class='num'>10,000.00</td></tr>
+      <tr class="total">
+        <td></td>
+        <td>Total</td>
+        <td class="num">2,00,000.00</td>
+        <td class="num">80,000.00</td>
+        <td class="num">60,000.00</td>
+        <td class="num">60,000.00</td>
+        <td class="num">2,00,000.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small">40 + 30 + 30 = 100. ₹ 80,000.00 + ₹ 60,000.00 + ₹ 60,000.00 = ₹ 2,00,000.00. The cross-add column equals the amount column on every line.</p>
+
+  <h3>Installment ledger</h3>
+  <p class="lede">One invoice, three demands. The amount due with this copy is installment 1. Installments 2 and 3 are demanded against this same invoice number when the stage is reached.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Stage and when it is payable</th>
+        <th class="num">Share</th>
+        <th class="num">Opening ₹</th>
+        <th class="num">This demand ₹</th>
+        <th class="num">Balance ₹</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Advance<br><span>On acceptance of this invoice, before hosting</span></td><td class='num'>40%</td><td class='num'>2,00,000.00</td><td class='num'>80,000.00</td><td class='num'>1,20,000.00</td></tr><tr><td>2</td><td>During hosting<br><span>While production hosting is being completed</span></td><td class='num'>30%</td><td class='num'>1,20,000.00</td><td class='num'>60,000.00</td><td class='num'>60,000.00</td></tr><tr><td>3</td><td>Post-hosting<br><span>After the site is set, training is done, and finalization is closed</span></td><td class='num'>30%</td><td class='num'>60,000.00</td><td class='num'>60,000.00</td><td class='num'>0.00</td></tr>
+    </tbody>
+  </table>
+  <pre class="formula">2,00,000.00 − 80,000.00 = 1,20,000.00
+1,20,000.00 − 60,000.00 = 60,000.00
+60,000.00 − 60,000.00 = 0.00</pre>
+  <div class="foot"><span>ABR/2026-27/001 · Abracerabra</span><span>Page 3 of 4</span></div>
+</section>
+
+<section class="sheet">
+  <div class="bar">
+    <span>ABR/2026-27/001 · Page 4 of 4</span>
+    <span>GST working and acceptance</span>
+  </div>
+  <p class="sheet-title">GST composition of the agreed price</p>
+  <div class="callout">
+    <strong>GST is not charged on this invoice.</strong>
+    No supplier GSTIN is printed, so this is not a tax invoice under the CGST Act and input tax credit must not be claimed on it. The working below only shows how ₹ 2,00,000.00 splits if treated as a price inclusive of 18% (CGST 9% + SGST 9%, intra-state, Karnataka, SAC 998314). Nothing is added on top.
+  </div>
+  <pre class="formula">Contract value (C)                         2,00,000.00
+Rate (r)                                   18%
+  CGST                                     9%
+  SGST                                     9%
+  IGST                                     nil — place of supply is Karnataka, same state
+
+Taxable value = C × 100 / (100 + 18)
+              = 2,00,000.00 × 100 / 118
+              = 169491.5254237288
+Rounded half-up to the paisa               1,69,491.53
+
+CGST = 1,69,491.53 × 0.09 = 15254.237700
+Rounded half-up to the paisa               15,254.24
+SGST = 1,69,491.53 × 0.09 = 15254.237700
+Rounded half-up to the paisa               15,254.24
+
+Taxable + CGST + SGST                      2,00,000.01
+Round off                                  (0.01)
+Amount payable                             2,00,000.00</pre>
+
+  <h3>Same composition, by installment</h3>
+  <p class="small">Taxable value, CGST, and SGST are shared in proportion to ₹ 80,000 / ₹ 60,000 / ₹ 60,000. The one-paisa round-off sits on the installment that would otherwise be a paisa over, so each demand stays a round rupee amount.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Installment</th>
+        <th class="num">Taxable ₹</th>
+        <th class="num">CGST 9%</th>
+        <th class="num">SGST 9%</th>
+        <th class="num">Subtotal</th>
+        <th class="num">Round off</th>
+        <th class="num">Payable ₹</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Advance</td><td class='num'>67,796.61</td><td class='num'>6,101.70</td><td class='num'>6,101.70</td><td class='num'>80,000.01</td><td class='num'>(0.01)</td><td class='num'>80,000.00</td></tr><tr><td>During hosting</td><td class='num'>50,847.46</td><td class='num'>4,576.27</td><td class='num'>4,576.27</td><td class='num'>60,000.00</td><td class='num'>0.00</td><td class='num'>60,000.00</td></tr><tr><td>Post-hosting</td><td class='num'>50,847.46</td><td class='num'>4,576.27</td><td class='num'>4,576.27</td><td class='num'>60,000.00</td><td class='num'>0.00</td><td class='num'>60,000.00</td></tr>
+      <tr class="total">
+        <td>Total</td>
+        <td class="num">1,69,491.53</td>
+        <td class="num">15,254.24</td>
+        <td class="num">15,254.24</td>
+        <td class="num">2,00,000.01</td>
+        <td class="num">(0.01)</td>
+        <td class="num">2,00,000.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>What is covered</h3>
+  <ul class="clean">
+    <li>React and Vite storefront: home, catalog, category, product, RFQ cart, logistics, not-found.</li>
+    <li>28 products, 6 categories, indicative INR prices, MOQ and lot size. No online payment.</li>
+    <li>English, Japanese, French, and Arabic.</li>
+    <li>Serverless routes: GET /api/health, GET /api/products, POST /api/quote, with RFQ references and the Sheets webhook.</li>
+    <li>Vercel configuration and deployment notes. Hosting charges of the platform itself, a custom domain, and the webhook sender key are not in this ₹ 2,00,000.00.</li>
+  </ul>
+
+  <h3>Declaration</h3>
+  <p class="small">I state that the price on this invoice is ₹ 2,00,000.00 (Indian Rupees Two Lakh Only), payable in three installments of ₹ 80,000.00, ₹ 60,000.00, and ₹ 60,000.00. Billed hours are the price build-up on page 2. GST is not charged. Quote ABR/2026-27/001 on the payment advice.</p>
+
+  <div class="sign">
+    <div class="box">
+      <div class="who">For the supplier</div>
+      <div class="line">Pavan Ram · Authorised signatory<br>Date: 07 October 2026</div>
+    </div>
+    <div class="box">
+      <div class="who">Accepted for Abracerabra</div>
+      <div class="line">Krishnamurthy Badarinatha<br>Signature and date</div>
+    </div>
+  </div>
+  <p class="note">E. &amp; O. E. This copy is the original for the recipient. A duplicate may be printed for the supplier.</p>
+  <div class="foot"><span>ABR/2026-27/001 · Abracerabra · ₹ 2,00,000.00</span><span>Page 4 of 4</span></div>
+</section>
+
+</body>
+</html>
