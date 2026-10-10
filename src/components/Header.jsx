@@ -18,20 +18,27 @@ export default function Header() {
   const { t } = useLanguage();
   const { cartCount } = useCart();
   const { categories } = useCatalog();
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
   const [tapNav, setTapNav] = useState(false);
   const closeTimer = useRef(null);
 
   const productsActive = /^\/(catalog|category|product)(\/|$)/.test(pathname);
+  const marketsActive = hash === '#markets' || hash.startsWith('#market-');
+  const marketLinks = [
+    ['rail', 'market.rail.title'],
+    ['metal', 'market.metal.title'],
+    ['finish', 'market.finish.title'],
+    ['ceramic', 'market.ceramic.title'],
+  ];
 
   useEffect(() => {
     const mobileLayout = window.matchMedia(MOBILE_NAV_QUERY);
     const canHover = window.matchMedia(HOVER_QUERY);
     const onChange = () => {
       setTapNav(prefersTapNav());
-      setProductsOpen(false);
+      setOpenMenu(null);
     };
     onChange();
     mobileLayout.addEventListener('change', onChange);
@@ -53,25 +60,25 @@ export default function Header() {
     }
   };
 
-  const openProducts = () => {
+  const openDropdown = (id) => {
     clearCloseTimer();
-    setProductsOpen(true);
+    setOpenMenu(id);
   };
 
-  const closeProductsSoon = () => {
+  const closeDropdownSoon = () => {
     clearCloseTimer();
-    closeTimer.current = setTimeout(() => setProductsOpen(false), DROPDOWN_CLOSE_DELAY);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), DROPDOWN_CLOSE_DELAY);
   };
 
   const closeMenu = () => {
     clearCloseTimer();
     setMenuOpen(false);
-    setProductsOpen(false);
+    setOpenMenu(null);
   };
 
-  const onProductsClick = () => {
+  const onDropdownClick = (id) => {
     if (!tapNav) return;
-    setProductsOpen((open) => !open);
+    setOpenMenu((open) => (open === id ? null : id));
   };
 
   return (
@@ -94,21 +101,21 @@ export default function Header() {
             {t('nav.home')}
           </NavLink>
           <div
-            className={`nav-item${productsOpen ? ' open' : ''}${productsActive ? ' active' : ''}`}
-            onMouseEnter={() => { if (!tapNav) openProducts(); }}
-            onMouseLeave={() => { if (!tapNav) closeProductsSoon(); }}
-            onFocus={() => { if (!tapNav) openProducts(); }}
+            className={`nav-item${openMenu === 'products' ? ' open' : ''}${productsActive ? ' active' : ''}`}
+            onMouseEnter={() => { if (!tapNav) openDropdown('products'); }}
+            onMouseLeave={() => { if (!tapNav) closeDropdownSoon(); }}
+            onFocus={() => { if (!tapNav) openDropdown('products'); }}
             onBlur={(event) => {
               if (tapNav || event.currentTarget.contains(event.relatedTarget)) return;
-              closeProductsSoon();
+              closeDropdownSoon();
             }}
           >
             <button
               type="button"
               className="nav-parent"
-              aria-expanded={productsOpen}
+              aria-expanded={openMenu === 'products'}
               aria-haspopup="true"
-              onClick={onProductsClick}
+              onClick={() => onDropdownClick('products')}
             >
               {t('nav.products')}
               <span className="nav-caret" aria-hidden="true" />
@@ -128,8 +135,37 @@ export default function Header() {
               </NavLink>
             </div>
           </div>
-          <NavLink to="/rfq-cart" data-nav="rfq" className="nav-rfq" onClick={closeMenu}>
-            {t('nav.rfq')}
+          <div
+            className={`nav-item${openMenu === 'markets' ? ' open' : ''}${marketsActive ? ' active' : ''}`}
+            onMouseEnter={() => { if (!tapNav) openDropdown('markets'); }}
+            onMouseLeave={() => { if (!tapNav) closeDropdownSoon(); }}
+            onFocus={() => { if (!tapNav) openDropdown('markets'); }}
+            onBlur={(event) => {
+              if (tapNav || event.currentTarget.contains(event.relatedTarget)) return;
+              closeDropdownSoon();
+            }}
+          >
+            <button
+              type="button"
+              className="nav-parent"
+              aria-expanded={openMenu === 'markets'}
+              aria-haspopup="true"
+              onClick={() => onDropdownClick('markets')}
+            >
+              {t('nav.markets')}
+              <span className="nav-caret" aria-hidden="true" />
+            </button>
+            <div className="nav-dropdown">
+              <Link to="/#markets" onClick={closeMenu}>{t('home.markets.title')}</Link>
+              {marketLinks.map(([id, key]) => (
+                <Link key={id} to={`/#market-${id}`} onClick={closeMenu}>
+                  {t(key)}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <NavLink to="/catalog" onClick={closeMenu}>
+            {t('nav.catalog')}
           </NavLink>
         </nav>
 
