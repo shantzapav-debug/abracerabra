@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { submitLogistics, verifyLogisticsLink } from '../api';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
@@ -29,7 +29,8 @@ const EMPTY = {
 
 export default function Logistics() {
   const [params] = useSearchParams();
-  const lead = params.get('lead') || '';
+  const { leadId: pathLead } = useParams();
+  const lead = params.get('lead') || pathLead || '';
   const token = params.get('t') || '';
   const { t } = useLanguage();
   const { toast } = useToast();

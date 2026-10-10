@@ -100,6 +100,21 @@ assert.equal(fallback.catalog.products.length, bundled.products.length);
 delete process.env.SHEETS_APP_URL;
 resetCatalogCache();
 
+const originalFetch = globalThis.fetch;
+globalThis.fetch = async () =>
+  new Response(JSON.stringify({ ok: false, error: "Products tab missing", products: [] }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+process.env.SHEETS_APP_URL = "https://script.google.com/macros/s/test/exec";
+resetCatalogCache();
+const rejected = await getPublicCatalog();
+assert.equal(rejected.source, "fallback");
+assert.equal(rejected.catalog.products.length, bundled.products.length);
+globalThis.fetch = originalFetch;
+delete process.env.SHEETS_APP_URL;
+resetCatalogCache();
+
 const logisticsKeys = Object.keys(I18N.en).filter(
   (key) => key.startsWith("logistics.") || key === "success.step2.note",
 );

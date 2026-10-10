@@ -430,7 +430,9 @@ function saveLogistics_(body) {
     markLeadReceived_(ss, leadId);
     return { ok: true, lead_id: leadId, updated: updated, created: !updated };
   } finally {
-    lock.releaseLock();
+    try {
+      lock.releaseLock();
+    } catch (ignore) {}
   }
 }
 
@@ -739,7 +741,7 @@ function secretOk_(e, body) {
   } else if (e && e.parameter && (e.parameter.app_shared_secret || e.parameter.secret)) {
     provided = String(e.parameter.app_shared_secret || e.parameter.secret);
   }
-  return safeEqual_(expected, provided);
+  return safeEqual_(String(expected).trim(), String(provided).trim());
 }
 
 function hmacSha256Hex_(message, secret) {
