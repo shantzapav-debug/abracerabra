@@ -81,6 +81,7 @@ export default function Header() {
               <rect x="5" y="3" width="14" height="18" rx="1.5" />
             </svg>
             <span className="quote-text" aria-hidden="true">{t('nav.request')}</span>
+            <span className="quote-short" aria-hidden="true">{t('nav.quote')}</span>
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Link>
           <button
