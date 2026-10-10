@@ -40,12 +40,14 @@ export default function RfqCart() {
     const { ref, lead_id: leadId } = submitResult;
     return (
       <>
-        <div className="container page-head">
-          <nav className="breadcrumb">
-            <Link to="/">{t('nav.home')}</Link>
-            <span className="sep">/</span>
-            <span>{t('cart.title')}</span>
-          </nav>
+        <div className="page-head">
+          <div className="container">
+            <nav className="breadcrumb">
+              <Link to="/">{t('nav.home')}</Link>
+              <span className="sep">/</span>
+              <span>{t('cart.title')}</span>
+            </nav>
+          </div>
         </div>
         <div className="container">
           <div className="success-panel">
@@ -136,16 +138,18 @@ export default function RfqCart() {
 
   return (
     <>
-      <div className="container page-head">
-        <nav className="breadcrumb">
-          <Link to="/">{t('nav.home')}</Link>
-          <span className="sep">/</span>
-          <span>{t('cart.title')}</span>
-        </nav>
-        <h1>{t('cart.title')}</h1>
-        <p className="sub">
-          {totals.items} line item(s) · {totals.units} units
-        </p>
+      <div className="page-head">
+        <div className="container">
+          <nav className="breadcrumb">
+            <Link to="/">{t('nav.home')}</Link>
+            <span className="sep">/</span>
+            <span>{t('cart.title')}</span>
+          </nav>
+          <h1>{t('cart.title')}</h1>
+          <p className="sub">
+            {totals.items} line item(s) · {totals.units} units
+          </p>
+        </div>
       </div>
       <div className="container">
         <div className="cart-layout">

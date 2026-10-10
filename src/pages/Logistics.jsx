@@ -76,12 +76,14 @@ export default function Logistics() {
   if (done) {
     return (
       <>
-        <div className="container page-head">
-          <nav className="breadcrumb">
-            <Link to="/">{t('nav.home')}</Link>
-            <span className="sep">/</span>
-            <span>{t('logistics.title')}</span>
-          </nav>
+        <div className="page-head">
+          <div className="container">
+            <nav className="breadcrumb">
+              <Link to="/">{t('nav.home')}</Link>
+              <span className="sep">/</span>
+              <span>{t('logistics.title')}</span>
+            </nav>
+          </div>
         </div>
         <div className="container">
           <div className="success-panel">
@@ -103,16 +105,18 @@ export default function Logistics() {
 
   return (
     <>
-      <div className="container page-head">
-        <nav className="breadcrumb">
-          <Link to="/">{t('nav.home')}</Link>
-          <span className="sep">/</span>
-          <Link to="/rfq-cart">{t('cart.title')}</Link>
-          <span className="sep">/</span>
-          <span>{t('logistics.title')}</span>
-        </nav>
-        <h1>{t('logistics.title')}</h1>
-        <p className="sub">{t('logistics.sub')}</p>
+      <div className="page-head">
+        <div className="container">
+          <nav className="breadcrumb">
+            <Link to="/">{t('nav.home')}</Link>
+            <span className="sep">/</span>
+            <Link to="/rfq-cart">{t('cart.title')}</Link>
+            <span className="sep">/</span>
+            <span>{t('logistics.title')}</span>
+          </nav>
+          <h1>{t('logistics.title')}</h1>
+          <p className="sub">{t('logistics.sub')}</p>
+        </div>
       </div>
       <div className="container">
         <div className="card rfq-form-card logistics-card">

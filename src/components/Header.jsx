@@ -1,30 +1,32 @@
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
-
-const LANGS = [
-  { code: 'en', title: 'English' },
-  { code: 'ja', title: '日本語' },
-  { code: 'fr', title: 'Français' },
-  { code: 'ar', title: 'العربية' },
-];
+import { useCatalog } from '../context/CatalogContext';
 
 export default function Header() {
-  const { t, lang, setLang } = useLanguage();
+  const { t } = useLanguage();
   const { cartCount } = useCart();
+  const { categories } = useCatalog();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const productsActive = /^\/(catalog|category|product)(\/|$)/.test(pathname);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setProductsOpen(false);
+  };
 
   return (
     <header className="site-header">
       <div className="container header-inner">
         <Link to="/" className="logo" aria-label="Abracerabra Home" onClick={closeMenu}>
-          <span className="logo-mark">A</span>
+          <span className="logo-mark" aria-hidden="true">A</span>
           <span className="logo-text">
             <strong>Abracerabra</strong>
-            <small>Global B2B RFQ</small>
+            <small>{t('brand.descriptor')}</small>
           </span>
         </Link>
 
@@ -36,33 +38,49 @@ export default function Header() {
           <NavLink to="/" end data-nav="home" onClick={closeMenu}>
             {t('nav.home')}
           </NavLink>
-          <NavLink to="/catalog" data-nav="catalog" onClick={closeMenu}>
-            {t('nav.catalog')}
-          </NavLink>
+          <div className={`nav-item${productsOpen ? ' open' : ''}${productsActive ? ' active' : ''}`}>
+            <button
+              type="button"
+              className="nav-parent"
+              aria-expanded={productsOpen}
+              aria-haspopup="true"
+              onClick={() => setProductsOpen((open) => !open)}
+            >
+              {t('nav.products')}
+              <span className="nav-caret" aria-hidden="true" />
+            </button>
+            <div className="nav-dropdown">
+              {categories.map((category) => (
+                <NavLink
+                  key={category.id}
+                  to={`/category/${category.id}`}
+                  onClick={closeMenu}
+                >
+                  {category.name}
+                </NavLink>
+              ))}
+              <NavLink to="/catalog" className="nav-dropdown-all" onClick={closeMenu}>
+                {t('cat.view')}
+              </NavLink>
+            </div>
+          </div>
           <NavLink to="/rfq-cart" data-nav="rfq" className="nav-rfq" onClick={closeMenu}>
             {t('nav.rfq')}
           </NavLink>
         </nav>
 
         <div className="header-actions">
-          <div className="lang-toggle" role="group" aria-label="Language">
-            {LANGS.map((l) => (
-              <button
-                key={l.code}
-                type="button"
-                className={`lang-btn${lang === l.code ? ' active' : ''}`}
-                title={l.title}
-                onClick={() => setLang(l.code)}
-              >
-                {l.code.toUpperCase()}
-              </button>
-            ))}
-          </div>
-          <Link to="/rfq-cart" className="cart-btn" aria-label="RFQ Quote Cart" onClick={closeMenu}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM3 3h2l2.4 12.3a2 2 0 0 0 2 1.7h7.6a2 2 0 0 0 2-1.6L21 8H7" />
+          <Link
+            to="/rfq-cart"
+            className="btn btn-primary nav-quote"
+            aria-label={t('nav.request')}
+            onClick={closeMenu}
+          >
+            <svg className="quote-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M8 6h8M8 10h8M8 14h5" />
+              <rect x="5" y="3" width="14" height="18" rx="1.5" />
             </svg>
-            <span className="cart-label">{t('nav.quote')}</span>
+            <span className="quote-text" aria-hidden="true">{t('nav.request')}</span>
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Link>
           <button
@@ -70,7 +88,7 @@ export default function Header() {
             className="menu-toggle"
             aria-label="Open menu"
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((o) => !o)}
+            onClick={() => setMenuOpen((open) => !open)}
           >
             <span /><span /><span />
           </button>

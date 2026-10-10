@@ -10,28 +10,38 @@ export default function Catalog() {
 
   if (loading) return <div className="loading">{t('loading')}</div>;
 
+  const imageFor = (categoryId) =>
+    products.find((product) => product.category === categoryId && product.image)?.image;
+
   return (
     <>
-      <div className="container page-head">
-        <nav className="breadcrumb">
-          <Link to="/">{t('nav.home')}</Link>
-          <span className="sep">/</span>
-          <span>{t('nav.catalog')}</span>
-        </nav>
-        <h1>{t('cat.title')}</h1>
-        <p className="sub">
-          {t('catalog.stats', {
-            products: products.length,
-            categories: categories.length,
-            indicative: t('price.indicative'),
-          })}
-        </p>
-      </div>
-      <section className="section" style={{ paddingTop: '1.5rem' }}>
+      <div className="page-head">
         <div className="container">
-          <div className="cat-grid" style={{ marginBottom: '2rem' }}>
+          <nav className="breadcrumb">
+            <Link to="/">{t('nav.home')}</Link>
+            <span className="sep">/</span>
+            <span>{t('nav.catalog')}</span>
+          </nav>
+          <h1>{t('cat.title')}</h1>
+          <p className="sub">
+            {t('catalog.stats', {
+              products: products.length,
+              categories: categories.length,
+              indicative: t('price.indicative'),
+            })}
+          </p>
+        </div>
+      </div>
+      <section className="section" style={{ paddingTop: '2rem' }}>
+        <div className="container">
+          <div className="cat-grid" style={{ marginBottom: '2.5rem' }}>
             {categories.map((c) => (
-              <CategoryCard key={c.id} category={c} count={categoryCount(c.id)} />
+              <CategoryCard
+                key={c.id}
+                category={c}
+                count={categoryCount(c.id)}
+                image={imageFor(c.id)}
+              />
             ))}
           </div>
           <div className="section-header">

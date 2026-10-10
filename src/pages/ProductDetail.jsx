@@ -28,11 +28,13 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="container page-head">
-        <h1>{t('not.found.product')}</h1>
-        <p className="sub">
-          <Link to="/catalog">{t('nav.catalog')}</Link>
-        </p>
+      <div className="page-head">
+        <div className="container">
+          <h1>{t('not.found.product')}</h1>
+          <p className="sub">
+            <Link to="/catalog">{t('nav.catalog')}</Link>
+          </p>
+        </div>
       </div>
     );
   }
@@ -42,20 +44,22 @@ export default function ProductDetail() {
 
   return (
     <>
-      <div className="container page-head">
-        <nav className="breadcrumb">
-          <Link to="/">{t('nav.home')}</Link>
-          <span className="sep">/</span>
-          <Link to="/catalog">{t('nav.catalog')}</Link>
-          <span className="sep">/</span>
-          {cat && (
-            <>
-              <Link to={`/category/${cat.id}`}>{cat.name}</Link>
-              <span className="sep">/</span>
-            </>
-          )}
-          <span>{product.name}</span>
-        </nav>
+      <div className="page-head">
+        <div className="container">
+          <nav className="breadcrumb">
+            <Link to="/">{t('nav.home')}</Link>
+            <span className="sep">/</span>
+            <Link to="/catalog">{t('nav.catalog')}</Link>
+            <span className="sep">/</span>
+            {cat && (
+              <>
+                <Link to={`/category/${cat.id}`}>{cat.name}</Link>
+                <span className="sep">/</span>
+              </>
+            )}
+            <span>{product.name}</span>
+          </nav>
+        </div>
       </div>
       <div className="container">
         <div className="detail-grid">
