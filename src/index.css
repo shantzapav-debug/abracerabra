@@ -691,6 +691,66 @@ body.rtl .intro-grid.is-in .intro-copy { transform: none; }
   background: var(--white);
   border: 1px solid var(--line);
   min-height: 100%;
+  overflow: hidden;
+}
+.reveal-photos img,
+.reveal-photos .placeholder {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-photos:not(.is-in) > :nth-child(odd) img,
+.reveal-photos:not(.is-in) > :nth-child(odd) .placeholder,
+.reveal-photos:not(.is-in) > :nth-child(odd) .product-img img,
+.reveal-photos:not(.is-in) > :nth-child(odd) .product-img .placeholder {
+  transform: translate3d(-36px, 28px, 0);
+}
+.reveal-photos:not(.is-in) > :nth-child(even) img,
+.reveal-photos:not(.is-in) > :nth-child(even) .placeholder,
+.reveal-photos:not(.is-in) > :nth-child(even) .product-img img,
+.reveal-photos:not(.is-in) > :nth-child(even) .product-img .placeholder {
+  transform: translate3d(36px, 28px, 0);
+}
+.reveal-photos.is-in img,
+.reveal-photos.is-in .placeholder {
+  opacity: 1;
+  transform: none;
+}
+.reveal-photos.is-in > :nth-child(2) img,
+.reveal-photos.is-in > :nth-child(2) .placeholder,
+.reveal-photos.is-in > :nth-child(2) .product-img img,
+.reveal-photos.is-in > :nth-child(2) .product-img .placeholder { transition-delay: 0.08s; }
+.reveal-photos.is-in > :nth-child(3) img,
+.reveal-photos.is-in > :nth-child(3) .placeholder,
+.reveal-photos.is-in > :nth-child(3) .product-img img,
+.reveal-photos.is-in > :nth-child(3) .product-img .placeholder { transition-delay: 0.16s; }
+.reveal-photos.is-in > :nth-child(4) img,
+.reveal-photos.is-in > :nth-child(4) .placeholder,
+.reveal-photos.is-in > :nth-child(4) .product-img img,
+.reveal-photos.is-in > :nth-child(4) .product-img .placeholder { transition-delay: 0.24s; }
+body.rtl .reveal-photos:not(.is-in) > :nth-child(odd) img,
+body.rtl .reveal-photos:not(.is-in) > :nth-child(odd) .placeholder,
+body.rtl .reveal-photos:not(.is-in) > :nth-child(odd) .product-img img,
+body.rtl .reveal-photos:not(.is-in) > :nth-child(odd) .product-img .placeholder {
+  transform: translate3d(36px, 28px, 0);
+}
+body.rtl .reveal-photos:not(.is-in) > :nth-child(even) img,
+body.rtl .reveal-photos:not(.is-in) > :nth-child(even) .placeholder,
+body.rtl .reveal-photos:not(.is-in) > :nth-child(even) .product-img img,
+body.rtl .reveal-photos:not(.is-in) > :nth-child(even) .product-img .placeholder {
+  transform: translate3d(-36px, 28px, 0);
+}
+body.rtl .reveal-photos.is-in img,
+body.rtl .reveal-photos.is-in .placeholder { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-photos img,
+  .reveal-photos .placeholder {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 .family-card img,
 .family-card .placeholder {

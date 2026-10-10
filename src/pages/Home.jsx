@@ -4,7 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useCatalog } from '../context/CatalogContext';
 import ProductCard from '../components/ProductCard';
 
-function IntroGrid({ children }) {
+function Reveal({ className, children }) {
   const ref = useRef(null);
   const [shown, setShown] = useState(false);
 
@@ -19,13 +19,13 @@ function IntroGrid({ children }) {
       if (!entry.isIntersecting) return;
       setShown(true);
       observer.disconnect();
-    }, { threshold: 0.35 });
+    }, { threshold: 0.28 });
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={ref} className={`intro-grid${shown ? ' is-in' : ''}`}>
+    <div ref={ref} className={`${className}${shown ? ' is-in' : ''}`}>
       {children}
     </div>
   );
@@ -87,19 +87,19 @@ export default function Home() {
 
       <section className="section intro-section">
         <div className="container">
-          <IntroGrid>
+          <Reveal className="intro-grid">
             <div className="intro-title">
               <p className="kicker">{t('cap.kicker')}</p>
               <h2>{t('home.solution')}</h2>
             </div>
             <p className="intro-copy">{t('cap.intro.body')}</p>
-          </IntroGrid>
+          </Reveal>
         </div>
       </section>
 
       <section className="family-section" aria-label={t('nav.products')}>
         <div className="container">
-          <div className="family-grid">
+          <Reveal className="family-grid reveal-photos">
             {families.map((family) => (
               <article className="family-card" key={family.key}>
                 {family.sample ? (
@@ -124,7 +124,7 @@ export default function Home() {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -167,11 +167,11 @@ export default function Home() {
               {t('cat.view')}
             </Link>
           </div>
-          <div className="product-grid">
+          <Reveal className="product-grid reveal-photos">
             {featured.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
