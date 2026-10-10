@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
@@ -6,7 +6,6 @@ import { useCatalog } from '../context/CatalogContext';
 
 const MOBILE_NAV_QUERY = '(max-width: 760px)';
 const HOVER_QUERY = '(hover: hover) and (pointer: fine)';
-const DROPDOWN_CLOSE_DELAY = 280;
 
 function prefersTapNav() {
   const mobileLayout = window.matchMedia(MOBILE_NAV_QUERY).matches;
@@ -18,27 +17,19 @@ export default function Header() {
   const { t } = useLanguage();
   const { cartCount } = useCart();
   const { categories } = useCatalog();
-  const { pathname, hash } = useLocation();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState(null);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [tapNav, setTapNav] = useState(false);
-  const closeTimer = useRef(null);
 
   const productsActive = /^\/(catalog|category|product)(\/|$)/.test(pathname);
-  const marketsActive = hash === '#markets' || hash.startsWith('#market-');
-  const marketLinks = [
-    ['rail', 'market.rail.title'],
-    ['metal', 'market.metal.title'],
-    ['finish', 'market.finish.title'],
-    ['ceramic', 'market.ceramic.title'],
-  ];
 
   useEffect(() => {
     const mobileLayout = window.matchMedia(MOBILE_NAV_QUERY);
     const canHover = window.matchMedia(HOVER_QUERY);
     const onChange = () => {
       setTapNav(prefersTapNav());
-      setOpenMenu(null);
+      setProductsOpen(false);
     };
     onChange();
     mobileLayout.addEventListener('change', onChange);
@@ -49,36 +40,15 @@ export default function Header() {
     };
   }, []);
 
-  useEffect(() => () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-  }, []);
-
-  const clearCloseTimer = () => {
-    if (closeTimer.current) {
-      clearTimeout(closeTimer.current);
-      closeTimer.current = null;
-    }
-  };
-
-  const openDropdown = (id) => {
-    clearCloseTimer();
-    setOpenMenu(id);
-  };
-
-  const closeDropdownSoon = () => {
-    clearCloseTimer();
-    closeTimer.current = setTimeout(() => setOpenMenu(null), DROPDOWN_CLOSE_DELAY);
-  };
-
   const closeMenu = () => {
-    clearCloseTimer();
     setMenuOpen(false);
-    setOpenMenu(null);
+    setProductsOpen(false);
   };
 
-  const onDropdownClick = (id) => {
-    if (!tapNav) return;
-    setOpenMenu((open) => (open === id ? null : id));
+  const releaseDesktopFocus = (event) => {
+    if (tapNav) return;
+    const active = document.activeElement;
+    if (active instanceof HTMLElement && event.currentTarget.contains(active)) active.blur();
   };
 
   return (
@@ -101,21 +71,18 @@ export default function Header() {
             {t('nav.home')}
           </NavLink>
           <div
-            className={`nav-item${openMenu === 'products' ? ' open' : ''}${productsActive ? ' active' : ''}`}
-            onMouseEnter={() => { if (!tapNav) openDropdown('products'); }}
-            onMouseLeave={() => { if (!tapNav) closeDropdownSoon(); }}
-            onFocus={() => { if (!tapNav) openDropdown('products'); }}
-            onBlur={(event) => {
-              if (tapNav || event.currentTarget.contains(event.relatedTarget)) return;
-              closeDropdownSoon();
-            }}
+            className={`nav-item${productsOpen ? ' open' : ''}${productsActive ? ' active' : ''}`}
+            onMouseLeave={releaseDesktopFocus}
           >
             <button
               type="button"
               className="nav-parent"
-              aria-expanded={openMenu === 'products'}
+              aria-expanded={tapNav ? productsOpen : undefined}
               aria-haspopup="true"
-              onClick={() => onDropdownClick('products')}
+              onClick={() => {
+                if (!tapNav) return;
+                setProductsOpen((open) => !open);
+              }}
             >
               {t('nav.products')}
               <span className="nav-caret" aria-hidden="true" />
@@ -133,35 +100,6 @@ export default function Header() {
               <NavLink to="/catalog" className="nav-dropdown-all" onClick={closeMenu}>
                 {t('cat.view')}
               </NavLink>
-            </div>
-          </div>
-          <div
-            className={`nav-item${openMenu === 'markets' ? ' open' : ''}${marketsActive ? ' active' : ''}`}
-            onMouseEnter={() => { if (!tapNav) openDropdown('markets'); }}
-            onMouseLeave={() => { if (!tapNav) closeDropdownSoon(); }}
-            onFocus={() => { if (!tapNav) openDropdown('markets'); }}
-            onBlur={(event) => {
-              if (tapNav || event.currentTarget.contains(event.relatedTarget)) return;
-              closeDropdownSoon();
-            }}
-          >
-            <button
-              type="button"
-              className="nav-parent"
-              aria-expanded={openMenu === 'markets'}
-              aria-haspopup="true"
-              onClick={() => onDropdownClick('markets')}
-            >
-              {t('nav.markets')}
-              <span className="nav-caret" aria-hidden="true" />
-            </button>
-            <div className="nav-dropdown">
-              <Link to="/#markets" onClick={closeMenu}>{t('home.markets.title')}</Link>
-              {marketLinks.map(([id, key]) => (
-                <Link key={id} to={`/#market-${id}`} onClick={closeMenu}>
-                  {t(key)}
-                </Link>
-              ))}
             </div>
           </div>
           <NavLink to="/catalog" onClick={closeMenu}>

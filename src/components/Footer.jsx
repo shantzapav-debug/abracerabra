@@ -31,15 +31,6 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4>{t('footer.markets')}</h4>
-          <ul>
-            <li><Link to="/#market-rail">{t('market.rail.title')}</Link></li>
-            <li><Link to="/#market-metal">{t('market.metal.title')}</Link></li>
-            <li><Link to="/#market-finish">{t('market.finish.title')}</Link></li>
-            <li><Link to="/#market-ceramic">{t('market.ceramic.title')}</Link></li>
-          </ul>
-        </div>
-        <div>
           <h4>{t('footer.company')}</h4>
           <ul>
             <li>

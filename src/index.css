@@ -208,19 +208,42 @@ h1, h2, h3, h4, .logo-text strong, .btn, .kicker {
 }
 .nav-item { position: relative; }
 .nav-dropdown {
-  display: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: calc(100% - 2px);
+  top: 100%;
   inset-inline-start: 0;
-  min-width: 230px;
+  min-width: 240px;
   background: var(--white);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-md);
-  padding: 0.4rem 0;
-  z-index: 20;
-  flex-direction: column;
+  padding: 0.35rem 0;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
 }
-.nav-item.open > .nav-dropdown { display: flex; }
+.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -12px;
+  height: 12px;
+}
+.nav-item:hover > .nav-dropdown,
+.nav-item:focus-within > .nav-dropdown,
+.nav-item.open > .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown { transition: none; }
+}
 .nav-dropdown a {
   display: block;
   padding: 0.6rem 1rem;
@@ -669,39 +692,6 @@ body.rtl .hero-bg::after {
 }
 .family-links a span { color: var(--muted); font-weight: 600; }
 .family-card .link-more { margin-top: auto; }
-
-.markets-section { padding-bottom: 3.5rem; scroll-margin-top: 96px; }
-.market-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-}
-.market-card {
-  position: relative;
-  min-height: 300px;
-  color: var(--white);
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  scroll-margin-top: 96px;
-  background: var(--blue-900);
-}
-.market-card img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.market-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 28, 48, 0.88) 0%, rgba(0, 28, 48, 0.12) 62%);
-}
-.market-card-copy { position: relative; z-index: 1; padding: 1.15rem; }
-.market-card h3 { font-size: 1.35rem; line-height: 1.2; margin-bottom: 0.4rem; }
-.market-card p { font-size: 0.84rem; line-height: 1.45; color: rgba(255, 255, 255, 0.92); }
 
 /* Category cards */
 .cat-grid {
@@ -1227,8 +1217,8 @@ body.rtl .hero-bg::after {
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.3fr 0.8fr 0.8fr 0.9fr 0.8fr;
-  gap: 1.75rem;
+  grid-template-columns: 1.4fr 0.9fr 1fr 0.9fr;
+  gap: 2rem;
   padding-bottom: 2.25rem;
 }
 .footer-kicker {
@@ -1305,8 +1295,7 @@ body.rtl .hero-bg::after {
 @media (max-width: 1020px) {
   .product-grid { grid-template-columns: repeat(3, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .family-grid,
-  .market-grid { grid-template-columns: 1fr 1fr; }
+  .family-grid { grid-template-columns: 1fr 1fr; }
   .cap-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1363,8 +1352,24 @@ body.rtl .hero-bg::after {
     box-shadow: none;
     background: var(--paper);
     padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: none;
+    pointer-events: none;
+    transition: none;
   }
-  .nav-item.open > .nav-dropdown { display: flex; }
+  .nav-dropdown::before { display: none; }
+  .nav-item:hover > .nav-dropdown,
+  .nav-item:focus-within > .nav-dropdown {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .nav-item.open > .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
   .menu-toggle { display: flex; }
   .logo-text small { display: none; }
   .quote-text { display: none; }
@@ -1376,8 +1381,7 @@ body.rtl .hero-bg::after {
   .cart-item .line-price { grid-column: 2; text-align: start; }
   .footer-grid,
   .cap-grid,
-  .family-grid,
-  .market-grid { grid-template-columns: 1fr; }
+  .family-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: stretch; }
 }
 

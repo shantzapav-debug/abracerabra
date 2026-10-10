@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useCatalog } from '../context/CatalogContext';
 import ProductCard from '../components/ProductCard';
@@ -11,13 +10,6 @@ const FAMILIES = [
   { key: 'specialties', ids: ['specialties'], titleKey: null, blurbKey: 'cat.band.specialties' },
 ];
 
-const MARKETS = [
-  { id: 'rail', titleKey: 'market.rail.title', bodyKey: 'market.rail.body', productId: 'gw-rail-100', category: 'grinding-wheel' },
-  { id: 'metal', titleKey: 'market.metal.title', bodyKey: 'market.metal.body', productId: 'gw-bench', category: 'grinding-wheel' },
-  { id: 'finish', titleKey: 'market.finish.title', bodyKey: 'market.finish.body', productId: 'hs-abrasive', category: 'honing-stone' },
-  { id: 'ceramic', titleKey: 'market.ceramic.title', bodyKey: 'market.ceramic.body', category: 'specialties' },
-];
-
 const CAPABILITIES = [
   'company.capability.sic',
   'company.capability.alumina',
@@ -27,15 +19,9 @@ const CAPABILITIES = [
 
 export default function Home() {
   const { t } = useLanguage();
-  const { hash } = useLocation();
   const { company, categories, products, categoryCount, loading } = useCatalog();
   const featured = products.slice(0, 4);
   const heroImage = products.find((product) => product.image)?.image;
-
-  useEffect(() => {
-    if (!hash || loading) return;
-    document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start' });
-  }, [hash, loading]);
 
   if (loading) return <div className="loading">{t('loading')}</div>;
 
@@ -47,9 +33,6 @@ export default function Home() {
     const sample = products.find((product) => family.ids.includes(product.category) && product.image);
     return { ...family, cats, sample };
   }).filter(Boolean);
-
-  const productImage = (id) => products.find((product) => product.id === id)?.image;
-  const categoryImage = (id) => products.find((product) => product.category === id && product.image)?.image;
 
   return (
     <>
@@ -138,37 +121,6 @@ export default function Home() {
                 <h3>{t(key)}</h3>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section markets-section" id="markets">
-        <div className="container">
-          <div className="section-header">
-            <div>
-              <p className="kicker">{t('nav.markets')}</p>
-              <h2>{t('home.markets.title')}</h2>
-              <p>{t('home.markets.lead')}</p>
-            </div>
-          </div>
-          <div className="market-grid">
-            {MARKETS.map((market) => {
-              const image = productImage(market.productId) || categoryImage(market.category);
-              return (
-                <Link
-                  className="market-card"
-                  id={`market-${market.id}`}
-                  key={market.id}
-                  to={`/category/${market.category}`}
-                >
-                  {image && <img src={image} alt="" />}
-                  <div className="market-card-copy">
-                    <h3>{t(market.titleKey)}</h3>
-                    <p>{t(market.bodyKey)}</p>
-                  </div>
-                </Link>
-              );
-            })}
           </div>
         </div>
       </section>
