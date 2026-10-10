@@ -4,6 +4,41 @@ import { useLanguage } from '../context/LanguageContext';
 import { useCatalog } from '../context/CatalogContext';
 import ProductCard from '../components/ProductCard';
 
+function useHeroProgress(ref, enabled) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (!enabled) return undefined;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const node = ref.current;
+      if (!node) return;
+      const distance = node.offsetHeight - window.innerHeight;
+      if (distance <= 0) {
+        setProgress(0);
+        return;
+      }
+      const traveled = Math.min(Math.max(-node.getBoundingClientRect().top, 0), distance);
+      setProgress(traveled / distance);
+    };
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [ref, enabled]);
+
+  return progress;
+}
+
 function Reveal({ className, children }) {
   const ref = useRef(null);
   const [shown, setShown] = useState(false);
@@ -49,7 +84,21 @@ export default function Home() {
   const { t } = useLanguage();
   const { company, categories, products, categoryCount, loading } = useCatalog();
   const featured = products.slice(0, 4);
-  const heroImage = products.find((product) => product.image)?.image;
+  const heroRef = useRef(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const heroImages = [];
+  const seenCategories = new Set();
+  for (const product of products) {
+    if (!product.image || seenCategories.has(product.category)) continue;
+    seenCategories.add(product.category);
+    heroImages.push(product.image);
+    if (heroImages.length === 4) break;
+  }
+  const heroProgress = useHeroProgress(heroRef, !loading && !reduceMotion && heroImages.length > 1);
+
+  useEffect(() => {
+    setReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   if (loading) return <div className="loading">{t('loading')}</div>;
 
@@ -64,10 +113,28 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero">
-        {heroImage && (
+      <section
+        className={`hero-scroll${reduceMotion ? ' is-static' : ''}`}
+        ref={heroRef}
+      >
+      <div className="hero">
+        {heroImages.length > 0 && (
           <div className="hero-bg" aria-hidden="true">
-            <img src={heroImage} alt="" />
+            {heroImages.map((src, index) => {
+              const span = Math.max(heroImages.length - 1, 1);
+              const opacity = reduceMotion || heroImages.length === 1
+                ? (index === 0 ? 1 : 0)
+                : Math.max(0, 1 - Math.abs(heroProgress * span - index));
+              const shift = reduceMotion ? 0 : (index - heroProgress * span) * 10;
+              return (
+                <img
+                  key={`${src}-${index}`}
+                  src={src}
+                  alt=""
+                  style={{ opacity, transform: `translate3d(0, ${shift}%, 0)` }}
+                />
+              );
+            })}
           </div>
         )}
         <div className="container hero-inner">
@@ -83,6 +150,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </div>
       </section>
 
       <section className="section intro-section">
