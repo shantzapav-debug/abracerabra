@@ -6,7 +6,7 @@
     "Leads": "Leads",
     "Logistics": "Logistics"
   },
-  "note": "Receptionist edits Products prices/MOQs in the sheet. GET /api/products serves src/data/products.json. POST /api/quote POSTs the lead row to webhookUrl. Set WEBHOOK_SENDER_KEY in the environment. Leave webhookSenderKey empty and never commit a sender key. Local outbox files are a best-effort backup and are not available on Vercel.",
+  "note": "Receptionist edits Products in the sheet and publishes from the Abracerabra menu. GET /api/products reads published rows from the Apps Script web app (SHEETS_APP_URL) and falls back to src/data/products.json. POST /api/quote still POSTs the lead row to webhookUrl. Set WEBHOOK_SENDER_KEY in the environment. Leave webhookSenderKey empty and never commit a sender key. Local outbox files are a best-effort backup and are not available on Vercel.",
   "webhookUrl": "https://api2.cursor.sh/automations/webhook/dec6e32b-b4b0-5ace-bb41-020742fbe8f3",
   "webhookSenderKey": ""
 }

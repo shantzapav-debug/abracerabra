@@ -59,21 +59,8 @@ export default function RfqCart() {
               {leadId && <div className="ref">Lead ID: {leadId}</div>}
             </div>
             <p className="success-note">{t('success.step2.note')}</p>
-            {leadId && (
-              <p className="success-demo">
-                {t('success.step2.demo')}{' '}
-                <Link to={`/logistics/${leadId}`} className="demo-link">
-                  {t('success.step2.link')}
-                </Link>
-              </p>
-            )}
             <div className="success-actions">
-              {leadId && (
-                <Link to={`/logistics/${leadId}`} className="btn btn-primary">
-                  {t('success.step2.cta')}
-                </Link>
-              )}
-              <Link to="/catalog" className="btn btn-ghost">
+              <Link to="/catalog" className="btn btn-primary">
                 {t('success.back')}
               </Link>
             </div>

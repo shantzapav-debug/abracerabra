@@ -1,10 +1,11 @@
 import { json } from "../lib/http.mjs";
-import { getCatalog } from "../lib/quote.mjs";
+import { PRODUCTS_CACHE_CONTROL, getPublicCatalog } from "../lib/catalog.mjs";
 
 export default {
-  fetch(request) {
+  async fetch(request) {
     if (request.method === "OPTIONS") return json(204, null);
     if (request.method !== "GET") return json(404, { detail: "Not found" });
-    return json(200, getCatalog());
+    const { catalog } = await getPublicCatalog();
+    return json(200, catalog, { "Cache-Control": PRODUCTS_CACHE_CONTROL });
   },
 };

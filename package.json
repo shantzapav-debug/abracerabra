@@ -8,6 +8,7 @@
     "build": "vite build",
     "api": "node tools/quote-api.mjs",
     "lint": "oxlint",
+    "test": "node tools/logistics-token-test.mjs && node tools/catalog-contract-test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

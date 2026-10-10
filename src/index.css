@@ -1285,7 +1285,20 @@ body.rtl .reveal-photos.is-in .placeholder { transform: none; }
   gap: 0.75rem;
   justify-content: center;
 }
-.logistics-card { max-width: 640px; margin: 1.75rem auto 2rem; }
+.logistics-card { max-width: 760px; margin: 1.75rem auto 2rem; }
+.logistics-status { margin-top: 2rem; }
+.invalid-panel .invalid-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.15rem;
+  background: var(--danger-bg);
+  color: var(--danger);
+  display: grid;
+  place-items: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+.invalid-panel p { margin-bottom: 1.15rem; }
 .lead-chip {
   display: flex;
   align-items: center;

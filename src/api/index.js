@@ -10,6 +10,6 @@ export {
 
 export { submitQuote, listQuotes } from './quotes';
 
-export { submitLogistics, listLogistics } from './logistics';
+export { submitLogistics, verifyLogisticsLink } from './logistics';
 
 export { API_URL, apiUrl, apiFetch } from './client';

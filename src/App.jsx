@@ -26,6 +26,7 @@ export default function App() {
                   <Route path="category/:id" element={<Category />} />
                   <Route path="product/:id" element={<ProductDetail />} />
                   <Route path="rfq-cart" element={<RfqCart />} />
+                  <Route path="logistics" element={<Logistics />} />
                   <Route path="logistics/:leadId" element={<Logistics />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
