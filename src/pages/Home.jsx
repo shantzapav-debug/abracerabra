@@ -1,7 +1,35 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useCatalog } from '../context/CatalogContext';
 import ProductCard from '../components/ProductCard';
+
+function IntroGrid({ children }) {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShown(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setShown(true);
+      observer.disconnect();
+    }, { threshold: 0.35 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`intro-grid${shown ? ' is-in' : ''}`}>
+      {children}
+    </div>
+  );
+}
 
 const FAMILIES = [
   { key: 'grinding', ids: ['grinding-wheel'], titleKey: null, blurbKey: 'cat.band.grinding' },
@@ -58,12 +86,14 @@ export default function Home() {
       </section>
 
       <section className="section intro-section">
-        <div className="container intro-grid">
-          <div>
-            <p className="kicker">{t('cap.kicker')}</p>
-            <h2>{t('home.solution')}</h2>
-          </div>
-          <p className="intro-copy">{t('cap.intro.body')}</p>
+        <div className="container">
+          <IntroGrid>
+            <div className="intro-title">
+              <p className="kicker">{t('cap.kicker')}</p>
+              <h2>{t('home.solution')}</h2>
+            </div>
+            <p className="intro-copy">{t('cap.intro.body')}</p>
+          </IntroGrid>
         </div>
       </section>
 

@@ -509,6 +509,37 @@ body.rtl .hero-bg::after {
   font-size: 1.02rem;
   max-width: 40rem;
 }
+.intro-grid .kicker,
+.intro-grid h2,
+.intro-grid .intro-copy {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.intro-grid .kicker { transform: translateY(16px); }
+.intro-grid h2 { transform: translateY(32px); transition-delay: 0.08s; }
+.intro-grid .intro-copy {
+  transform: translateX(42px);
+  transition-delay: 0.14s;
+}
+.intro-grid.is-in .kicker,
+.intro-grid.is-in h2,
+.intro-grid.is-in .intro-copy {
+  opacity: 1;
+  transform: none;
+}
+body.rtl .intro-grid .intro-copy { transform: translateX(-42px); }
+body.rtl .intro-grid.is-in .intro-copy { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-grid .kicker,
+  .intro-grid h2,
+  .intro-grid .intro-copy {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 .section-header {
   display: flex;
   align-items: flex-end;
