@@ -1,8 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import { useCatalog } from '../context/CatalogContext';
+
+const MOBILE_NAV_QUERY = '(max-width: 760px)';
+const HOVER_QUERY = '(hover: hover) and (pointer: fine)';
+const DROPDOWN_CLOSE_DELAY = 280;
+
+function prefersTapNav() {
+  const mobileLayout = window.matchMedia(MOBILE_NAV_QUERY).matches;
+  const canHover = window.matchMedia(HOVER_QUERY).matches;
+  return mobileLayout || !canHover;
+}
 
 export default function Header() {
   const { t } = useLanguage();
@@ -11,12 +21,57 @@ export default function Header() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [tapNav, setTapNav] = useState(false);
+  const closeTimer = useRef(null);
 
   const productsActive = /^\/(catalog|category|product)(\/|$)/.test(pathname);
 
+  useEffect(() => {
+    const mobileLayout = window.matchMedia(MOBILE_NAV_QUERY);
+    const canHover = window.matchMedia(HOVER_QUERY);
+    const onChange = () => {
+      setTapNav(prefersTapNav());
+      setProductsOpen(false);
+    };
+    onChange();
+    mobileLayout.addEventListener('change', onChange);
+    canHover.addEventListener('change', onChange);
+    return () => {
+      mobileLayout.removeEventListener('change', onChange);
+      canHover.removeEventListener('change', onChange);
+    };
+  }, []);
+
+  useEffect(() => () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }, []);
+
+  const clearCloseTimer = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+  const openProducts = () => {
+    clearCloseTimer();
+    setProductsOpen(true);
+  };
+
+  const closeProductsSoon = () => {
+    clearCloseTimer();
+    closeTimer.current = setTimeout(() => setProductsOpen(false), DROPDOWN_CLOSE_DELAY);
+  };
+
   const closeMenu = () => {
+    clearCloseTimer();
     setMenuOpen(false);
     setProductsOpen(false);
+  };
+
+  const onProductsClick = () => {
+    if (!tapNav) return;
+    setProductsOpen((open) => !open);
   };
 
   return (
@@ -38,13 +93,22 @@ export default function Header() {
           <NavLink to="/" end data-nav="home" onClick={closeMenu}>
             {t('nav.home')}
           </NavLink>
-          <div className={`nav-item${productsOpen ? ' open' : ''}${productsActive ? ' active' : ''}`}>
+          <div
+            className={`nav-item${productsOpen ? ' open' : ''}${productsActive ? ' active' : ''}`}
+            onMouseEnter={() => { if (!tapNav) openProducts(); }}
+            onMouseLeave={() => { if (!tapNav) closeProductsSoon(); }}
+            onFocus={() => { if (!tapNav) openProducts(); }}
+            onBlur={(event) => {
+              if (tapNav || event.currentTarget.contains(event.relatedTarget)) return;
+              closeProductsSoon();
+            }}
+          >
             <button
               type="button"
               className="nav-parent"
               aria-expanded={productsOpen}
               aria-haspopup="true"
-              onClick={() => setProductsOpen((open) => !open)}
+              onClick={onProductsClick}
             >
               {t('nav.products')}
               <span className="nav-caret" aria-hidden="true" />
